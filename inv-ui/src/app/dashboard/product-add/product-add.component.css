@@ -1,0 +1,15 @@
+.product-div {
+  width: 100%;
+}
+.buttons {
+  float: right;
+  padding: 10px;
+  background-color: #eee;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+
+  width: 100%;
+}
+.btn {
+  margin-left: 15px;
+}

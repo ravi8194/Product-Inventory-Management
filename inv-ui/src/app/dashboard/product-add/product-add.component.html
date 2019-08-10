@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row">
+    <div class="product-div">
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-primary">
+          <h6 class="card-text">Product Details</h6>
+        </div>
+        <div class="card-body p-0">
+          <form
+            [formGroup]="productForm"
+            (ngSubmit)="onSubmit()"
+            class="form-horizontal"
+          >
+            <div class="col p-0">
+              <div class="form-group">
+                <label for="product_name">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="product_name"
+                  placeholder="Product Name"
+                />
+                <div class="invalid-feedback">
+                  <div
+                    *ngIf="
+                      isSubmitted &&
+                      formControls.product_name.hasError('required')
+                    "
+                  >
+                    Please enter product name.
+                  </div>
+                  <div
+                    *ngIf="
+                      isSubmitted &&
+                      formControls.product_name.hasError('minlength')
+                    "
+                  >
+                    Product name must be at most 5 characters long.
+                  </div>
+                  <div
+                    *ngIf="
+                      isSubmitted &&
+                      formControls.product_name.hasError('maxlength')
+                    "
+                  >
+                    Product name must be at most 50 characters long.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col p-0">
+              <div class="form-group">
+                <label for="price">Price</label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="price"
+                  placeholder="Enter price"
+                />
+                <div class="invalid-feedback">
+                  <div
+                    *ngIf="
+                      isSubmitted && formControls.price.hasError('required')
+                    "
+                  >
+                    Please enter product price.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col p-0">
+              <div class="form-group">
+                <label for="rating">Rating</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="rating"
+                  placeholder="rating"
+                />
+                <div class="invalid-feedback">
+                  <div
+                    *ngIf="
+                      isSubmitted && formControls.rating.hasError('required')
+                    "
+                  >
+                    Please enter rating.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="buttons">
+              <button type="submit" class="btn btn-primary" (click)="add($event)">
+                Add
+              </button>
+              <button type="button" class="btn btn-success" (click)="update($event)">
+                Save
+              </button>
+              <button type="button" class="btn btn-danger" (click)="delete($event)">
+                Delete
+              </button>
+              <button type="button" class="btn btn-warning" (click)="reset()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
