@@ -23,11 +23,9 @@
   width: 100%;
   background-color: #c1c1c1;
   box-shadow: 0px 5px 3px 0px rgba(0, 0, 0, 0.3);
-}
-.top-header p {
+  margin-bottom: 30px;
 }
 div.forms {
-  padding: 15px;
   float: left;
   width: 100%;
 }

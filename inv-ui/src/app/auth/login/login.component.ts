@@ -41,21 +41,24 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.loginForm.value).subscribe(res => {
       if (res.success) {
-        // Redirect the dashboard
+        // set token to localstorage
         localStorage.setItem('token', res.Token);
-        //  alert(res.Token);
+        // Redirect the dashboard
         this.coreService.navigateTo('/dashboard');
+        // Toaster Message
         this.coreService.showSuccess(res.message);
+        this.isSubmitted = false;
       } else {
-        alert('esle');
         this.coreService.showError(res.message);
       }
     },
+      // execute when error in api calling
       (err) => {
         this.coreService.showError(err.message);
       }
     );
   }
+  // getting controls of form fields
   get formControls() {
     return this.loginForm.controls;
   }

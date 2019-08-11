@@ -3,12 +3,18 @@
     <div class="product-div">
       <div class="card border-primary mb-3">
         <div class="card-header bg-primary">
-          <h6 class="card-text">Product Details</h6>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <h6 class="card-text">Product Details</h6>
+            </li>
+            <li *ngIf="product" class="list-inline-item float-right"> 
+              <h6 class="card-text text-right">{{name}} (productId: {{productid}})</h6>
+            </li>
+          </ul>
         </div>
         <div class="card-body p-0">
           <form
             [formGroup]="productForm"
-            (ngSubmit)="onSubmit()"
             class="form-horizontal"
           >
             <div class="col p-0">
@@ -51,13 +57,18 @@
             <div class="col p-0">
               <div class="form-group">
                 <label for="price">Price</label>
-
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="price"
-                  placeholder="Enter price"
-                />
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="price"
+                      placeholder="Enter price"
+                    />
+                </div>
+               
                 <div class="invalid-feedback">
                   <div
                     *ngIf="

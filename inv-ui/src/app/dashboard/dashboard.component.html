@@ -5,9 +5,14 @@
         <h4>Product Mangager</h4>
       </li>
       <li class="nav-item">
-        <button class="btn btn-success" routerLink="/login" (click)="logout()">
+          <button type="button" class="btn btn-light btn-sm" routerLink="/login"
+          (click)="logout()">
+              <span class="glyphicon glyphicon-log-out"></span> Log out
+            </button>
+            
+        <!-- <button class="btn btn-success" routerLink="/login" (click)="logout()">
           logout
-        </button>
+        </button> -->
       </li>
     </ul>
   </div>
@@ -20,10 +25,9 @@
     </div>
   </div>
   <div class="col-md-8">
-    <!-- <app-product-count [productCount]="productCount"></app-product-count> -->
     <div class="form-div">
       <div class="top-header">
-        <p class="text-center">Product Count: {{productCount}}</p>
+        <p class="text-center"><strong>Product Count: {{productCount}}</strong></p>
       </div>
       <div class="forms">
         <app-product-add [product]="selectedItem"

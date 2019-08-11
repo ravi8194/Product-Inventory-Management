@@ -5,14 +5,23 @@
       <h6 class="card-text">Products</h6>
     </div>
     <div class="card-body p-0">
-        <a
-        mat-list-item
-        *ngFor="let data of ProductList"
-        (click)="selectedProduct(data)"
-      >
-        <div>{{ data.product_name }}</div>
-        <div>&nbsp;&#36;{{ data.price }}</div>
-      </a>
+      <ul class="list-group list-group-flush product-ul">
+        <li class="list-group-item">
+          <a
+              mat-list-item
+              *ngFor="let data of ProductList"
+              (click)="selectedProduct(data)"
+              class="hover"
+            >
+              <ul class="list-inline pointer">
+                <li class="list-inline-item ">
+                    {{ data.product_name }}
+                </li>
+                <li class="list-inline-item float-right">&nbsp;&#36;{{ data.price }}</li>
+              </ul>
+          </a>
+        </li>
+      </ul>  
     </div>
   </div>
 </div>

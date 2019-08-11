@@ -7,7 +7,7 @@ import { AuthService } from '../auth.service';
 import { CoreService } from 'src/app/core/core.service';
 
 @Component({
-  selector: "ltp-signup",
+  selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
       ]
     });
   }
-
+  // getting controls of form fields
   get formControls() {
     return this.SignupForm.controls;
   }

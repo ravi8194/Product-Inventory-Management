@@ -6,7 +6,6 @@ module.exports = {
     const body = req.body;
     const value = joi.validate(body, productJoiSchema);
     if (value.error) {
-      // return next(value.error);
       return res.json({
         success: 0,
         message: value.error.details[0].message

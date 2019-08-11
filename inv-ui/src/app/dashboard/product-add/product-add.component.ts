@@ -13,6 +13,7 @@ export class ProductAddComponent implements OnInit, OnChanges  {
   @Input() public product;
   @Output() public productList = new EventEmitter();
   public productid = null;
+  public name: null;
   message: string;
   productForm: FormGroup;
   id: string;
@@ -35,7 +36,6 @@ export class ProductAddComponent implements OnInit, OnChanges  {
   }
   setValue() {}
   ngOnChanges() {
-    // When form will render it will be blank
     if (this.product !== '') {
       this.productForm.patchValue({
         product_name: this.product.product_name,
@@ -43,6 +43,7 @@ export class ProductAddComponent implements OnInit, OnChanges  {
         rating: this.product.rating
       });
       this.productid = this.product.id;
+      this.name = this.product.product_name;
     }
   }
   add() {
@@ -61,7 +62,7 @@ export class ProductAddComponent implements OnInit, OnChanges  {
   }
 
   update() {
-    this.setValue();
+    this.isSubmitted = true;
     this.productService
       .update(this.productForm.value, this.productid)
       .subscribe(res => {
@@ -70,18 +71,21 @@ export class ProductAddComponent implements OnInit, OnChanges  {
           this.coreService.showSuccess(res.message);
           this.reset();
           this.productList.emit(res);
+          this.isSubmitted = false;
         } else {
           this.coreService.showError(res.message);
         }
       });
   }
   delete(e) {
+    this.isSubmitted = true;
     if (this.productForm.valid) {
       this.productService.delete(this.productid).subscribe(res => {
         if (res.success) {
           this.coreService.showSuccess(res.message);
           this.reset();
           this.productList.emit(res);
+          this.isSubmitted = false;
         }
       });
     } else {
@@ -96,6 +100,7 @@ export class ProductAddComponent implements OnInit, OnChanges  {
     this.productForm.reset();
     this.product = null;
     this.productid = null;
+    this.isSubmitted = false;
   }
   get formControls() {
     return this.productForm.controls;
