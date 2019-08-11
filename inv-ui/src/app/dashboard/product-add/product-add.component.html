@@ -17,7 +17,7 @@
             [formGroup]="productForm"
             class="form-horizontal"
           >
-            <div class="col p-0">
+            <div class="col">
               <div class="form-group">
                 <label for="product_name">Name</label>
                 <input
@@ -54,7 +54,7 @@
                 </div>
               </div>
             </div>
-            <div class="col p-0">
+            <div class="col">
               <div class="form-group">
                 <label for="price">Price</label>
                 <div class="input-group mb-2">
@@ -80,24 +80,28 @@
                 </div>
               </div>
             </div>
-            <div class="col p-0">
-              <div class="form-group">
-                <label for="rating">Rating</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="rating"
-                  placeholder="rating"
-                />
-                <div class="invalid-feedback">
-                  <div
-                    *ngIf="
-                      isSubmitted && formControls.rating.hasError('required')
-                    "
-                  >
-                    Please enter rating.
+            <div class="col">
+                <div class="form-group">
+            <div class="card text-black mb-3">
+                <div class="card-header text-white">Rating</div>
+                <div class="card-body">
+                    <input
+                    type="text"
+                    class="form-control"
+                    formControlName="rating"
+                    placeholder="rating"
+                  />
+                  <div class="invalid-feedback">
+                    <div
+                      *ngIf="
+                        isSubmitted && formControls.rating.hasError('required')
+                      "
+                    >
+                      Please enter rating.
+                    </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
             <div class="buttons">
