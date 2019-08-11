@@ -48,22 +48,24 @@ export class ProductAddComponent implements OnInit, OnChanges  {
   }
   add() {
     this.isSubmitted = true;
-    this.setValue();
-    this.productService.add(this.productForm.value).subscribe(res => {
-      if (res.success) {
-        this.coreService.showSuccess(res.message);
-        this.reset();
-        this.productList.emit(res);
-        this.isSubmitted = false;
-      } else {
-        this.coreService.showError(res.message);
-      }
-    });
+    if (this.productForm.valid) {
+      this.productService.add(this.productForm.value).subscribe(res => {
+        if (res.success) {
+          this.coreService.showSuccess(res.message);
+          this.reset();
+          this.productList.emit(res);
+          this.isSubmitted = false;
+        } else {
+          this.coreService.showError(res.message);
+        }
+      });
+    }
   }
 
   update() {
     this.isSubmitted = true;
-    this.productService
+    if (this.productForm.valid) {
+      this.productService
       .update(this.productForm.value, this.productid)
       .subscribe(res => {
         console.log(res);
@@ -76,6 +78,8 @@ export class ProductAddComponent implements OnInit, OnChanges  {
           this.coreService.showError(res.message);
         }
       });
+    }
+
   }
   delete(e) {
     this.isSubmitted = true;

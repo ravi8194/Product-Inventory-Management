@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(6),
-          ValidationService.passwordValidator
         ]
       ]
     });
@@ -37,26 +36,27 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.isSubmitted = true;
-    this.message = 'Trying to log in ...';
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe(res => {
+        if (res.success) {
+          // set token to localstorage
+          localStorage.setItem('token', res.Token);
+          // Redirect the dashboard
+          this.coreService.navigateTo('/dashboard');
+          // Toaster Message
+          this.coreService.showSuccess(res.message);
+          this.isSubmitted = false;
+        } else {
+          this.coreService.showError(res.message);
+        }
+      },
+        // execute when error in api calling
+        (err) => {
+          this.coreService.showError(err.message);
+        }
+      );
+    }
 
-    this.authService.login(this.loginForm.value).subscribe(res => {
-      if (res.success) {
-        // set token to localstorage
-        localStorage.setItem('token', res.Token);
-        // Redirect the dashboard
-        this.coreService.navigateTo('/dashboard');
-        // Toaster Message
-        this.coreService.showSuccess(res.message);
-        this.isSubmitted = false;
-      } else {
-        this.coreService.showError(res.message);
-      }
-    },
-      // execute when error in api calling
-      (err) => {
-        this.coreService.showError(err.message);
-      }
-    );
   }
   // getting controls of form fields
   get formControls() {
